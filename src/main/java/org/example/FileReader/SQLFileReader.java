@@ -8,7 +8,7 @@ public class SQLFileReader {
     public String readSQLFile(String filePath) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("SQL/" + filePath))) {
             reader.lines().forEach(stringBuilder::append);
         } catch (IOException e) {
             e.printStackTrace();
