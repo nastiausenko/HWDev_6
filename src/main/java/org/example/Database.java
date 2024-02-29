@@ -19,7 +19,7 @@ public class Database {
         }
     }
 
-    public Database getInstance() {
+    public static Database getInstance() {
         return instance;
     }
 
