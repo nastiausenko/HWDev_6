@@ -2,10 +2,7 @@ package org.example.DatabaseService;
 
 import org.example.Database;
 import org.example.FileReader.SQLFileReader;
-import org.example.model.LongestProject;
-import org.example.model.MaxProjectCountClient;
-import org.example.model.MaxSalaryWorker;
-import org.example.model.YoungestEldestWorkers;
+import org.example.model.*;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -71,5 +68,16 @@ public class DatabaseQueryService {
             listYoungestEldestWorkers.add(new YoungestEldestWorkers(type, name, birthday));
         }
         return listYoungestEldestWorkers;
+    }
+
+    public List<ProjectPrices> printProjectPrices() throws SQLException {
+        List<ProjectPrices> listProjectPrices = new ArrayList<>();
+        ResultSet rs = stm.executeQuery(sqlFileReader.readSQLFile("SQL/print_project_prices.sql"));
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            int price = rs.getInt("project_price");
+            listProjectPrices.add(new ProjectPrices(id, price));
+        }
+        return listProjectPrices;
     }
 }
