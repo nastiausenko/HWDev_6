@@ -11,7 +11,7 @@ public class DatabasePopulateService {
         SQLFileReader sqlFileReader = new SQLFileReader();
 
         try(Statement stm = Database.getInstance().getConnection().createStatement()) {
-            stm.execute(sqlFileReader.readSQLFile("SQL/populate_db.sql"));
+            stm.execute(sqlFileReader.readSQLFile("populate_db.sql"));
         } catch (SQLException e) {
             e.fillInStackTrace();
         }

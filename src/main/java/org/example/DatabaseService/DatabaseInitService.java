@@ -11,7 +11,7 @@ public class DatabaseInitService {
         SQLFileReader sqlFileReader = new SQLFileReader();
 
         try(Statement stm = Database.getInstance().getConnection().createStatement()) {
-            stm.execute(sqlFileReader.readSQLFile("SQL/init_db.sql"));
+            stm.execute(sqlFileReader.readSQLFile("init_db.sql"));
         } catch (SQLException e) {
             e.fillInStackTrace();
         }
