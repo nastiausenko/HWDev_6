@@ -5,10 +5,13 @@ import org.example.FileReader.SQLFileReader;
 import org.example.model.LongestProject;
 import org.example.model.MaxProjectCountClient;
 import org.example.model.MaxSalaryWorker;
+import org.example.model.YoungestEldestWorkers;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,5 +59,17 @@ public class DatabaseQueryService {
             listMaxSalaryWorker.add(new MaxSalaryWorker(name, salary));
         }
         return listMaxSalaryWorker;
+    }
+
+    public List<YoungestEldestWorkers> findYoungestEldestWorkers() throws SQLException {
+        List<YoungestEldestWorkers> listYoungestEldestWorkers = new ArrayList<>();
+        ResultSet rs = stm.executeQuery(sqlFileReader.readSQLFile("SQL/find_youngest_eldest_workers.sql"));
+        while (rs.next()) {
+            String type = rs.getString("TYPE");
+            String name = rs.getString("name");
+            LocalDate birthday = LocalDate.parse(rs.getString("birthday"));
+            listYoungestEldestWorkers.add(new YoungestEldestWorkers(type, name, birthday));
+        }
+        return listYoungestEldestWorkers;
     }
 }
