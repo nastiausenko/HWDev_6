@@ -4,6 +4,7 @@ import org.example.Database;
 import org.example.FileReader.SQLFileReader;
 import org.example.model.LongestProject;
 import org.example.model.MaxProjectCountClient;
+import org.example.model.MaxSalaryWorker;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,5 +45,16 @@ public class DatabaseQueryService {
             listLongestProject.add(new LongestProject(id, monthDiff));
         }
         return listLongestProject;
+    }
+
+    public List<MaxSalaryWorker> findMaxSalaryWorker() throws SQLException {
+        List<MaxSalaryWorker> listMaxSalaryWorker = new ArrayList<>();
+        ResultSet rs = stm.executeQuery(sqlFileReader.readSQLFile("SQL/find_max_salary_worker.sql"));
+        while (rs.next()) {
+            String name = rs.getString("name");
+            int salary = rs.getInt("salary");
+            listMaxSalaryWorker.add(new MaxSalaryWorker(name, salary));
+        }
+        return listMaxSalaryWorker;
     }
 }
