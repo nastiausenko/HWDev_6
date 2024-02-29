@@ -1,14 +1,17 @@
-package org.example;
+package org.example.DatabaseService;
+
+import org.example.Database;
+import org.example.FileReader.SQLFileReader;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DatabasePopulateService {
+public class DatabaseInitService {
     public static void main(String[] args) {
         SQLFileReader sqlFileReader = new SQLFileReader();
 
         try(Statement stm = Database.getInstance().getConnection().createStatement()) {
-            stm.execute(sqlFileReader.readSQLFile("SQL/populate_db.sql"));
+            stm.execute(sqlFileReader.readSQLFile("SQL/init_db.sql"));
         } catch (SQLException e) {
             e.fillInStackTrace();
         }

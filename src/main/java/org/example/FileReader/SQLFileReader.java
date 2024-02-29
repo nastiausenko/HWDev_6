@@ -1,4 +1,4 @@
-package org.example;
+package org.example.FileReader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,11 +8,12 @@ public class SQLFileReader {
     public String readSQLFile(String filePath) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             reader.lines().forEach(stringBuilder::append);
         } catch (IOException e) {
-            e.fillInStackTrace();
+            e.printStackTrace();
         }
+
         return stringBuilder.toString();
     }
 }
