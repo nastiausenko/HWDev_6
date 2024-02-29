@@ -2,6 +2,7 @@ package org.example.DatabaseService;
 
 import org.example.Database;
 import org.example.FileReader.SQLFileReader;
+import org.example.model.LongestProject;
 import org.example.model.MaxProjectCountClient;
 
 import java.sql.ResultSet;
@@ -32,5 +33,16 @@ public class DatabaseQueryService {
             listMaxProjectCountClient.add(new MaxProjectCountClient(name, projectCount));
         }
         return listMaxProjectCountClient;
+    }
+
+    public List<LongestProject> findLongestProject() throws SQLException {
+        List<LongestProject> listLongestProject = new ArrayList<>();
+        ResultSet rs = stm.executeQuery(sqlFileReader.readSQLFile("SQL/find_longest_project.sql"));
+        while (rs.next()) {
+            int id = rs.getInt("project_id");
+            int monthDiff = rs.getInt("month_diff");
+            listLongestProject.add(new LongestProject(id, monthDiff));
+        }
+        return listLongestProject;
     }
 }
